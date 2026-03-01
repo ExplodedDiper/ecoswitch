@@ -1,0 +1,22 @@
+{
+  "hemp": { "estimated_co2": 5 },
+  "tencel": { "estimated_co2": 6 },
+  "lyocell": { "estimated_co2": 6 },
+  "modal": { "estimated_co2": 7 },
+  "alpaca": { "estimated_co2": 8 },
+  "merino wool": { "estimated_co2": 9 },
+  "recycled cotton": { "estimated_co2": 7 },
+  "recycled nylon": { "estimated_co2": 8 },
+  "recycled polyamide": { "estimated_co2": 8 },
+  "cork": { "estimated_co2": 4 },
+  "natural rubber": { "estimated_co2": 6 },
+  "bamboo viscose": { "estimated_co2": 7 },
+  "organic linen": { "estimated_co2": 5 },
+  "recycled denim": { "estimated_co2": 8 },
+  "plant leather": { "estimated_co2": 7 },
+  "vegan leather": { "estimated_co2": 9 },
+  "cashmere": { "estimated_co2": 15 },
+  "recycled cashmere": { "estimated_co2": 10 },
+  "spandex": { "estimated_co2": 12 },
+  "elastane": { "estimated_co2": 12 }
+}

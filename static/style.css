@@ -1,0 +1,359 @@
+/* ===== GLOBAL RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== BASE ===== */
+body {
+    font-family: 'Inter', sans-serif;
+    background: #F2E8D5;
+    color: #2E2E2E;
+}
+
+/* ===== LANDING PAGE ===== */
+body.landing {
+    text-align: center;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.divider {
+    margin: 20px 0;
+    font-size: 14px;
+    color: #999;
+}
+
+.google-btn {
+    display: block;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+/* ===== LOGO (Landing Page) ===== */
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin-top: 80px;
+}
+
+/* Navbar Layout */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-img {
+    width: 50px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.login-btn {
+    background: #3e6b3a;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-btn:hover {
+    background: #2f5230;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-pic {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.logout-btn {
+    background: #ddd;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+}
+/* ===== AUTH PAGES ===== */
+
+.auth-page {
+    background: #f4efe7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Inter', sans-serif;
+}
+
+.auth-container {
+    background: white;
+    padding: 40px;
+    width: 350px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.auth-container h2 {
+    margin-bottom: 25px;
+    font-family: 'Playfair Display', serif;
+}
+
+.auth-container input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.auth-container button {
+    width: 100%;
+    padding: 12px;
+    background: #3e6b3a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.auth-container button:hover {
+    background: #2f5230;
+}
+
+.auth-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.google-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.google-btn:hover {
+    background: #f5f5f5;
+}
+
+.logo h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    letter-spacing: 1px;
+}
+
+.logo img {
+    width: 110px;   /* BIGGER LOGO */
+}
+
+/* ===== NAVBAR LOGO (Analyzer Page) ===== */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-logo h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+}
+
+.nav-logo img {
+    width: 55px;
+}
+
+/* ===== GREEN HERO PANEL ===== */
+.green-panel {
+    background: #2F5D2E;
+    color: white;
+    width: 75%;
+    margin: 60px auto;
+    padding: 70px 60px;
+    border-radius: 35px;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.green-panel h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    line-height: 1.2;
+}
+
+.green-panel p {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #EAEAEA;
+}
+
+/* ===== CTA BUTTON ===== */
+.cta-button {
+    display: inline-block;
+    margin-top: 35px;
+    padding: 14px 32px;
+    background: #8B5E3C;
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #6F4A2E;
+    transform: translateY(-3px);
+}
+
+/* ===== STICKERS ===== */
+.sticker {
+    position: absolute;
+    width: 130px;
+    transition: transform 0.4s ease;
+}
+
+.sticker:hover {
+    transform: scale(1.08) rotate(-3deg);
+}
+
+.hoodie { top: 140px; left: 7%; }
+.sneakers { top: 200px; right: 8%; }
+.tote { bottom: 120px; left: 12%; }
+.jeans { bottom: 60px; right: 10%; }
+
+/* ===== FOOTER DISCLAIMER ===== */
+.footer-disclaimer {
+    font-size: 13px;
+    color: #5A5A5A;
+    padding: 35px 20px;
+    max-width: 850px;
+    margin: 60px auto 30px;
+    line-height: 1.6;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    background: #F2E8D5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 60px;
+}
+
+.navbar h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #2E2E2E;
+    font-weight: 500;
+}
+
+.navbar a:hover {
+    color: #2F5D2E;
+}
+
+/* ===== ANALYZER PAGE ===== */
+.analyzer-container {
+    max-width: 800px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+.analyzer-container h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+/* ===== INPUT ===== */
+input {
+    padding: 14px;
+    width: 65%;
+    border-radius: 10px;
+    border: 1px solid #D6CDBA;
+    font-size: 16px;
+    background: #FFFDF7;
+}
+
+input:focus {
+    outline: none;
+    border-color: #2F5D2E;
+}
+
+/* ===== BUTTON ===== */
+button {
+    padding: 14px 22px;
+    background: #2F5D2E;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin-left: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: #3F6F3D;
+}
+
+/* ===== RESULT CARD ===== */
+#result {
+    margin-top: 50px;
+    text-align: left;
+    background: #FFFFFF;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+}
+
+#result h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 10px;
+}
+
+#result h4 {
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+#result p {
+    margin-bottom: 8px;
+    color: #444;
+}

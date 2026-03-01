@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - EcoSwitch</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="auth-page">
+
+<div class="auth-container">
+    <h2>Welcome Back 🌱</h2>
+
+    <form method="POST">
+        <input name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <div class="divider">OR</div>
+
+    <a href="/login/google" class="google-btn">
+        Continue with Google
+    </a>
+
+    <p class="auth-link">
+        Don't have an account?
+        <a href="/register">Sign up</a>
+    </p>
+</div>
+
+</body>
+</html>

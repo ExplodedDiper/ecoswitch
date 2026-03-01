@@ -1,0 +1,1114 @@
+{
+  "fashion": [
+    {
+      "brand": "Patagonia",
+      "product_name": "Nano Puff Recycled Jacket",
+      "product_type": "jacket",
+      "material": "Recycled Polyester",
+      "certifications": ["Fair Trade"],
+      "repairability": "High",
+      "estimated_co2": 8,
+      "why_lower_impact": "Insulation from recycled materials and long-lasting design; strong repair program."
+    },
+    {
+      "brand": "Pact",
+      "product_name": "Organic Cotton Everyday T-Shirt",
+      "product_type": "shirt",
+      "material": "Organic Cotton",
+      "certifications": ["GOTS"],
+      "repairability": "Medium",
+      "estimated_co2": 6,
+      "why_lower_impact": "GOTS-certified organic cotton, low-impact dyes and transparent supply chain."
+    },
+    {
+      "brand": "Allbirds",
+      "product_name": "Tree Dasher Running Shoe",
+      "product_type": "shoes",
+      "material": "Tencel & SweetFoam",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 9,
+      "why_lower_impact": "Bio-based materials (Tencel, sugarcane-based foam) and focus on lowering shoe carbon footprint."
+    },
+    {
+      "brand": "Tentree",
+      "product_name": "Recycled Fleece Hoodie",
+      "product_type": "hoodie",
+      "material": "Recycled Polyester",
+      "certifications": ["Plant-Based Materials"],
+      "repairability": "Medium",
+      "estimated_co2": 8,
+      "why_lower_impact": "Made from recycled materials and supports reforestation per item."
+    },
+    {
+      "brand": "Veja",
+      "product_name": "V-10 Organic Cotton Sneakers",
+      "product_type": "shoes",
+      "material": "Organic Cotton & Wild Rubber",
+      "certifications": ["Fair Trade"],
+      "repairability": "Low",
+      "estimated_co2": 11,
+      "why_lower_impact": "Organic cotton uppers and ethically sourced wild rubber from Brazil."
+    },
+    {
+      "brand": "Reformation",
+      "product_name": "Linen Midi Dress",
+      "product_type": "dress",
+      "material": "Linen",
+      "certifications": ["OEKO-TEX"],
+      "repairability": "Medium",
+      "estimated_co2": 10,
+      "why_lower_impact": "Low-water linen and transparent production processes."
+    },
+    {
+      "brand": "Everlane",
+      "product_name": "The Organic Cotton Crew Sweater",
+      "product_type": "sweater",
+      "material": "Organic Cotton",
+      "certifications": ["GOTS"],
+      "repairability": "High",
+      "estimated_co2": 8,
+      "why_lower_impact": "Transparent pricing and organic materials reduce overall footprint."
+    },
+    {
+      "brand": "Outerknown",
+      "product_name": "S.E.A. Organic Denim Jeans",
+      "product_type": "jeans",
+      "material": "Organic Cotton Denim",
+      "certifications": ["Fair Labor"],
+      "repairability": "High",
+      "estimated_co2": 9,
+      "why_lower_impact": "Organic denim and durable construction for extended lifetime."
+    },
+    {
+      "brand": "Girlfriend Collective",
+      "product_name": "High-Rise Recycled Leggings",
+      "product_type": "leggings",
+      "material": "Recycled Plastic Fibers",
+      "certifications": ["Recycled Standard"],
+      "repairability": "Medium",
+      "estimated_co2": 8,
+      "why_lower_impact": "Post-consumer recycled materials and inclusive sizing; take-back reuse programs."
+    },
+    {
+      "brand": "Thought Clothing",
+      "product_name": "Bamboo Blend Knit Sweater",
+      "product_type": "sweater",
+      "material": "Bamboo Viscose",
+      "certifications": ["OEKO-TEX"],
+      "repairability": "Medium",
+      "estimated_co2": 7,
+      "why_lower_impact": "Renewable bamboo fibers and lower-impact dyeing."
+    },
+    {
+      "brand": "Nudie Jeans",
+      "product_name": "Lean Dean Organic Jeans",
+      "product_type": "jeans",
+      "material": "Organic Cotton",
+      "certifications": ["GOTS"],
+      "repairability": "High",
+      "estimated_co2": 8,
+      "why_lower_impact": "Free repair program and organic denim reduce lifetime footprint."
+    },
+    {
+      "brand": "Rothy's",
+      "product_name": "Recycled Knit Ballet Flat",
+      "product_type": "shoes",
+      "material": "Recycled Plastic",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 7,
+      "why_lower_impact": "Made from recycled plastics and machine washable to extend use."
+    },
+    {
+      "brand": "Pangaia",
+      "product_name": "Grape Leather Sneakers",
+      "product_type": "shoes",
+      "material": "Plant-based Leather (Grape)",
+      "certifications": [],
+      "repairability": "Low",
+      "estimated_co2": 9,
+      "why_lower_impact": "Uses agricultural byproducts for plant-based leather alternatives."
+    },
+    {
+      "brand": "Stella McCartney",
+      "product_name": "Vegan Tailored Blazer",
+      "product_type": "blazer",
+      "material": "Recycled Polyester Blend",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 12,
+      "why_lower_impact": "Luxury brand with vegan leather and recycled materials focus."
+    },
+    {
+      "brand": "Organic Basics",
+      "product_name": "Renewal Boxer Briefs",
+      "product_type": "underwear",
+      "material": "Recycled Nylon",
+      "certifications": ["OEKO-TEX"],
+      "repairability": "N/A",
+      "estimated_co2": 6,
+      "why_lower_impact": "Underwear made from recycled materials and responsible factories."
+    },
+    {
+      "brand": "MUD Jeans",
+      "product_name": "Lease A Jeans Organic Denim",
+      "product_type": "jeans",
+      "material": "Organic Cotton Denim",
+      "certifications": ["GOTS"],
+      "repairability": "High",
+      "estimated_co2": 8,
+      "why_lower_impact": "Circular model (leasing & recycling) extends product lifecycle."
+    },
+    {
+      "brand": "Finisterre",
+      "product_name": "Recycled Performance Shell",
+      "product_type": "jacket",
+      "material": "Recycled Nylon",
+      "certifications": ["Bluesign"],
+      "repairability": "High",
+      "estimated_co2": 9,
+      "why_lower_impact": "Durable outerwear built to last with recycled technical fabrics."
+    },
+    {
+      "brand": "Nisolo",
+      "product_name": "Handcrafted Leather Oxford (Vegetable-Tanned)",
+      "product_type": "shoes",
+      "material": "Vegetable-Tanned Leather",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 13,
+      "why_lower_impact": "Long-lasting footwear with ethical supply chain and repair options."
+    },
+    {
+      "brand": "Veja",
+      "product_name": "Esplar Leather Sneakers",
+      "product_type": "shoes",
+      "material": "Leather (eco-processed) & Organic Cotton",
+      "certifications": ["Fair Trade"],
+      "repairability": "Low",
+      "estimated_co2": 11,
+      "why_lower_impact": "Transparent sourcing of materials with emphasis on fair trade."
+    },
+    {
+      "brand": "People Tree",
+      "product_name": "Fairtrade Cotton Shirt Dress",
+      "product_type": "dress",
+      "material": "Organic Cotton",
+      "certifications": ["Fair Trade", "GOTS"],
+      "repairability": "Medium",
+      "estimated_co2": 7,
+      "why_lower_impact": "Fairtrade-certified production and organic fibers."
+    },
+    {
+      "brand": "Eileen Fisher",
+      "product_name": "Linen Relaxed Shirt",
+      "product_type": "shirt",
+      "material": "Organic Linen",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 7,
+      "why_lower_impact": "Durable design and take-back recycling program."
+    },
+    {
+      "brand": "Patagonia",
+      "product_name": "Better Sweater Fleece",
+      "product_type": "sweater",
+      "material": "Recycled Polyester",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 8,
+      "why_lower_impact": "Recycled fibers; strong repair and resale focus."
+    },
+    {
+      "brand": "Armedangels",
+      "product_name": "Organic Cotton Chino",
+      "product_type": "pants",
+      "material": "Organic Cotton",
+      "certifications": ["GOTS"],
+      "repairability": "Medium",
+      "estimated_co2": 7,
+      "why_lower_impact": "GOTS-certified basics with ethical production."
+    },
+    {
+      "brand": "Houdini",
+      "product_name": "Re:Down Jacket",
+      "product_type": "jacket",
+      "material": "Recycled Down",
+      "certifications": ["RDS"],
+      "repairability": "High",
+      "estimated_co2": 9,
+      "why_lower_impact": "Recycled insulation and high durability."
+    },
+    {
+      "brand": "Salty Bag Co.",
+      "product_name": "Recycled Ocean Plastic Backpack",
+      "product_type": "bag",
+      "material": "Recycled Plastic",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 10,
+      "why_lower_impact": "Constructed from recovered ocean plastics; long-lasting carry design."
+    },
+    {
+      "brand": "Stella McCartney",
+      "product_name": "Organic Cotton Poplin Shirt",
+      "product_type": "shirt",
+      "material": "Organic Cotton",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 12,
+      "why_lower_impact": "High-end sustainable fashion with vegan material innovations."
+    },
+    {
+      "brand": "PrAna",
+      "product_name": "Organic Cotton Convertible Pants",
+      "product_type": "pants",
+      "material": "Organic Cotton",
+      "certifications": ["Fair Trade"],
+      "repairability": "High",
+      "estimated_co2": 8,
+      "why_lower_impact": "Durable travel clothing with fair-trade sourcing."
+    },
+    {
+      "brand": "Tretorn",
+      "product_name": "Recycled Rubber Rain Boots",
+      "product_type": "boots",
+      "material": "Recycled Rubber",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 11,
+      "why_lower_impact": "Use of recycled rubber reduces virgin material demand."
+    },
+    {
+      "brand": "Tentree",
+      "product_name": "TreeBlend Polo",
+      "product_type": "shirt",
+      "material": "Organic Cotton Blend",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 7,
+      "why_lower_impact": "Sustainable fiber blends and tree-planting program per sale."
+    },
+    {
+      "brand": "Patagonia",
+      "product_name": "Capilene Cool Lightweight Shirt",
+      "product_type": "active_shirt",
+      "material": "Recycled Polyester",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 8,
+      "why_lower_impact": "Recycled performance fabric built to last and reduce single-use."
+    },
+    {
+      "brand": "Aday",
+      "product_name": "The Everywhere Dress (Tencel)",
+      "product_type": "dress",
+      "material": "Tencel Lyocell",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 8,
+      "why_lower_impact": "Lyocell is produced in closed-loop process lowering environmental effects."
+    },
+    {
+      "brand": "Kuyichi",
+      "product_name": "Organic Denim Jacket",
+      "product_type": "jacket",
+      "material": "Organic Cotton Denim",
+      "certifications": ["GOTS"],
+      "repairability": "High",
+      "estimated_co2": 9,
+      "why_lower_impact": "Organic denim with fair production and repair focus."
+    },
+    {
+      "brand": "Veja",
+      "product_name": "Campo Leather Runner",
+      "product_type": "shoes",
+      "material": "Eco Leather & Wild Rubber",
+      "certifications": ["Fair Trade"],
+      "repairability": "Low",
+      "estimated_co2": 11,
+      "why_lower_impact": "Transparent sourcing of natural rubber and materials."
+    },
+    {
+      "brand": "Pact",
+      "product_name": "Organic Cotton Sweatpants",
+      "product_type": "pants",
+      "material": "Organic Cotton",
+      "certifications": ["GOTS"],
+      "repairability": "Medium",
+      "estimated_co2": 7,
+      "why_lower_impact": "Simple basics made from certified organic cotton."
+    },
+    {
+      "brand": "Allbirds",
+      "product_name": "Tree Flyer Casual Shoe",
+      "product_type": "shoes",
+      "material": "Tencel Tree Fiber",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 9,
+      "why_lower_impact": "Natural Tencel upper and bio-based midsole lower carbon impact."
+    },
+    {
+      "brand": "Cariuma",
+      "product_name": "OCA Low Hemp Sneaker",
+      "product_type": "shoes",
+      "material": "Hemp & Recycled Rubber",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 9,
+      "why_lower_impact": "Hemp upper and sustainable rubber help reduce environmental impact."
+    },
+    {
+      "brand": "Kotn",
+      "product_name": "Egyptian Cotton Shirt",
+      "product_type": "shirt",
+      "material": "Cotton (ethically sourced)",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 7,
+      "why_lower_impact": "Ethical sourcing and transparent supply chain with farmer partnerships."
+    },
+    {
+      "brand": "People Tree",
+      "product_name": "Hemp Blend Skirt",
+      "product_type": "skirt",
+      "material": "Hemp Blend",
+      "certifications": ["Fair Trade"],
+      "repairability": "Medium",
+      "estimated_co2": 6,
+      "why_lower_impact": "Hemp requires less water and supports lower-impact textiles."
+    },
+    {
+      "brand": "Reformation",
+      "product_name": "Upcycled Satin Slip",
+      "product_type": "dress",
+      "material": "Recycled Polyester Satin",
+      "certifications": [],
+      "repairability": "Low",
+      "estimated_co2": 10,
+      "why_lower_impact": "Uses upcycled fabrics and low-water dye processes."
+    },
+    {
+      "brand": "Nisolo",
+      "product_name": "Alden Derby (Ethical Leather)",
+      "product_type": "shoes",
+      "material": "Ethically Sourced Leather",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 13,
+      "why_lower_impact": "Long-lasting design and transparent factories reduce overall environmental cost."
+    },
+    {
+      "brand": "Tala",
+      "product_name": "Recycled Active Bra",
+      "product_type": "active_top",
+      "material": "Recycled Polyester",
+      "certifications": [],
+      "repairability": "N/A",
+      "estimated_co2": 7,
+      "why_lower_impact": "Active basics made from recycled materials with low-impact processes."
+    },
+    {
+      "brand": "Outerknown",
+      "product_name": "Blanket Shirt Wool Blend",
+      "product_type": "shirt",
+      "material": "Wool & Organic Cotton",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 9,
+      "why_lower_impact": "Blend of durable natural fibers and ethical manufacturing."
+    },
+    {
+      "brand": "PrAna",
+      "product_name": "Sustainable Yoga Pants",
+      "product_type": "active_bottom",
+      "material": "Recycled Nylon",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 8,
+      "why_lower_impact": "Performance activewear built from recycled materials."
+    },
+    {
+      "brand": "Thought Clothing",
+      "product_name": "Hemp Tailored Blazer",
+      "product_type": "blazer",
+      "material": "Hemp Blend",
+      "certifications": ["OEKO-TEX"],
+      "repairability": "High",
+      "estimated_co2": 8,
+      "why_lower_impact": "Hemp-based tailoring uses lower-impact fibers and responsible processing."
+    },
+    {
+      "brand": "MATE the Label",
+      "product_name": "Organic Cotton Slip Dress",
+      "product_type": "dress",
+      "material": "Organic Cotton",
+      "certifications": ["GOTS"],
+      "repairability": "Medium",
+      "estimated_co2": 7,
+      "why_lower_impact": "Certified organic fiber and small-batch manufacturing."
+    },
+    {
+      "brand": "Pangaia",
+      "product_name": "SEAweed Fiber Tee",
+      "product_type": "shirt",
+      "material": "Seaweed Fiber Blend",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 8,
+      "why_lower_impact": "Innovative biobased materials reduce reliance on fossil resources."
+    },
+    {
+      "brand": "Nau",
+      "product_name": "Recycled Rain Shell",
+      "product_type": "jacket",
+      "material": "Recycled Nylon",
+      "certifications": ["Bluesign"],
+      "repairability": "High",
+      "estimated_co2": 9,
+      "why_lower_impact": "Technical outerwear using bluesign-approved materials and repairability."
+    },
+    {
+      "brand": "Toms",
+      "product_name": "Alpargata Hemp Slip-On",
+      "product_type": "shoes",
+      "material": "Hemp & Recycled Rubber",
+      "certifications": [],
+      "repairability": "Low",
+      "estimated_co2": 9,
+      "why_lower_impact": "Hemp canvas upper and focus on community impact."
+    },
+    {
+      "brand": "Rapanui",
+      "product_name": "Organic Cotton Hoodie (Circular)",
+      "product_type": "hoodie",
+      "material": "Organic Cotton",
+      "certifications": ["GOTS"],
+      "repairability": "High",
+      "estimated_co2": 7,
+      "why_lower_impact": "Circular production and traceable supply chain."
+    },
+    {
+      "brand": "Kotn",
+      "product_name": "Everyday Organic Tee",
+      "product_type": "shirt",
+      "material": "Organic Cotton",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 6,
+      "why_lower_impact": "Ethical sourcing and direct farmer partnerships."
+    },
+    {
+      "brand": "Patagonia",
+      "product_name": "Synchilla Snap-T Fleece",
+      "product_type": "sweater",
+      "material": "Recycled Polyester",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 8,
+      "why_lower_impact": "Recycled fleece and durable construction increases lifetime use."
+    },
+    {
+      "brand": "Girlfriend Collective",
+      "product_name": "Recycled Sports Bra",
+      "product_type": "active_top",
+      "material": "Recycled Polyester",
+      "certifications": [],
+      "repairability": "N/A",
+      "estimated_co2": 7,
+      "why_lower_impact": "High recycled content and inclusive sizing; take-back for upcycling."
+    },
+    {
+      "brand": "Eileen Fisher",
+      "product_name": "Renew Cashmere Cardigan (Recycled)",
+      "product_type": "cardigan",
+      "material": "Recycled Cashmere",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 10,
+      "why_lower_impact": "Regenerated fiber program and strong take-back & repair services."
+    },
+    {
+      "brand": "Fjällräven",
+      "product_name": "Re-Kånken Recycled Backpack",
+      "product_type": "bag",
+      "material": "Recycled Polyester",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 9,
+      "why_lower_impact": "Classic backpack updated with recycled materials for longevity."
+    },
+    {
+      "brand": "Patagonia",
+      "product_name": "P-6 Logo Responsibili-Tee",
+      "product_type": "shirt",
+      "material": "Recycled Cotton",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 6,
+      "why_lower_impact": "Made from recycled cotton and manufactured with transparency."
+    },
+    {
+      "brand": "Veja",
+      "product_name": "V-12 Canvas Runner",
+      "product_type": "shoes",
+      "material": "Organic Cotton Canvas & Wild Rubber",
+      "certifications": ["Fair Trade"],
+      "repairability": "Low",
+      "estimated_co2": 11,
+      "why_lower_impact": "Sustainable canvas and ethically sourced rubber."
+    },
+    {
+      "brand": "Reformation",
+      "product_name": "Upcycled Denim Jacket",
+      "product_type": "jacket",
+      "material": "Recycled Denim",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 9,
+      "why_lower_impact": "Uses upcycled denim and low-impact manufacturing."
+    },
+    {
+      "brand": "Patagonia",
+      "product_name": "Fair Trade Certified Chore Coat",
+      "product_type": "coat",
+      "material": "Organic Cotton",
+      "certifications": ["Fair Trade"],
+      "repairability": "High",
+      "estimated_co2": 9,
+      "why_lower_impact": "Fair trade certified production and durable design."
+    },
+    {
+      "brand": "People Tree",
+      "product_name": "Organic Cotton Shirt (Formal)",
+      "product_type": "shirt",
+      "material": "Organic Cotton",
+      "certifications": ["Fair Trade"],
+      "repairability": "Medium",
+      "estimated_co2": 7,
+      "why_lower_impact": "Ethically produced formal shirt with fair trade certification."
+    },
+    {
+      "brand": "ECOALF",
+      "product_name": "Recycled Nylon Parka",
+      "product_type": "jacket",
+      "material": "Recycled Nylon",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 9,
+      "why_lower_impact": "Made from recycled ocean and post-consumer plastics."
+    },
+    {
+      "brand": "Patagonia",
+      "product_name": "Lightweight Travel Pants (Recycled)",
+      "product_type": "pants",
+      "material": "Recycled Polyester",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 8,
+      "why_lower_impact": "Travel-friendly durable garment made from recycled fibers."
+    },
+    {
+      "brand": "Allbirds",
+      "product_name": "Tree Lounger Slip-On",
+      "product_type": "shoes",
+      "material": "Tencel & Recycled Foam",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 9,
+      "why_lower_impact": "Tencel knit upper and bio-based midsole reduce fossil-based materials."
+    },
+    {
+      "brand": "Stella McCartney",
+      "product_name": "Eco Tailored Trousers",
+      "product_type": "trousers",
+      "material": "Recycled Polyester Blend",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 12,
+      "why_lower_impact": "High-fashion brand focused on animal-free and recycled materials."
+    },
+    {
+      "brand": "Patagonia",
+      "product_name": "R1 Fleece Pullover",
+      "product_type": "active_top",
+      "material": "Recycled Polyester",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 8,
+      "why_lower_impact": "Performance fleece from recycled yarns, built for longevity."
+    },
+    {
+      "brand": "Eileen Fisher",
+      "product_name": "Sustainable Suit Jacket",
+      "product_type": "blazer",
+      "material": "Organic Wool Blend",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 11,
+      "why_lower_impact": "Focus on slow fashion and repair/resale to extend life."
+    },
+    {
+      "brand": "Tentree",
+      "product_name": "Reforest Tee (Organic)",
+      "product_type": "shirt",
+      "material": "Organic Cotton",
+      "certifications": ["GOTS"],
+      "repairability": "Medium",
+      "estimated_co2": 6,
+      "why_lower_impact": "Plant-a-tree program and organic fibers."
+    },
+    {
+      "brand": "Allbirds",
+      "product_name": "Tree Skipper Sandal",
+      "product_type": "sandals",
+      "material": "Tencel & Recycled Rubber",
+      "certifications": [],
+      "repairability": "Low",
+      "estimated_co2": 8,
+      "why_lower_impact": "Shift toward bio-based materials even in summer footwear."
+    },
+    {
+      "brand": "Wolven",
+      "product_name": "Recycled Swim Trunks",
+      "product_type": "swimwear",
+      "material": "Recycled Polyester",
+      "certifications": [],
+      "repairability": "N/A",
+      "estimated_co2": 7,
+      "why_lower_impact": "Swimwear made from recycled nylon and printed with low-impact inks."
+    },
+    {
+      "brand": "Outerknown",
+      "product_name": "Knit Polo Organic Cotton",
+      "product_type": "shirt",
+      "material": "Organic Cotton",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 7,
+      "why_lower_impact": "Durable knits and transparent production."
+    },
+    {
+      "brand": "P.F. Candle Co. (collab apparel)",
+      "product_name": "Recycled Capsule Tee",
+      "product_type": "shirt",
+      "material": "Recycled Cotton",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 6,
+      "why_lower_impact": "Capsule merch using recycled fibers avoids virgin materials."
+    },
+    {
+      "brand": "Veja",
+      "product_name": "Venturi Knit Runner",
+      "product_type": "shoes",
+      "material": "Organic Cotton & Wild Rubber",
+      "certifications": ["Fair Trade"],
+      "repairability": "Low",
+      "estimated_co2": 11,
+      "why_lower_impact": "Knitted upper reduces waste and natural rubber sourcing."
+    },
+    {
+      "brand": "Patagonia",
+      "product_name": "Capilene Cool Boxer Briefs",
+      "product_type": "underwear",
+      "material": "Recycled Polyester",
+      "certifications": [],
+      "repairability": "N/A",
+      "estimated_co2": 6,
+      "why_lower_impact": "Performance underwear using recycled fibers reduces virgin input."
+    },
+    {
+      "brand": "Girlfriend Collective",
+      "product_name": "Recycled Everyday Hoodie",
+      "product_type": "hoodie",
+      "material": "Recycled Polyester",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 8,
+      "why_lower_impact": "High recycled content and inclusive sizing; take-back for circularity."
+    },
+    {
+      "brand": "Reformation",
+      "product_name": "Linen Culottes",
+      "product_type": "pants",
+      "material": "Linen",
+      "certifications": ["OEKO-TEX"],
+      "repairability": "Medium",
+      "estimated_co2": 8,
+      "why_lower_impact": "Low-water linen and small-batch production reduce impact."
+    },
+    {
+      "brand": "People Tree",
+      "product_name": "Fair Trade Wool Coat",
+      "product_type": "coat",
+      "material": "Responsible Wool",
+      "certifications": ["Fair Trade"],
+      "repairability": "High",
+      "estimated_co2": 12,
+      "why_lower_impact": "Ethical wool sourcing and take-back programs."
+    },
+    {
+      "brand": "Tentree",
+      "product_name": "Eco Knit Beanie",
+      "product_type": "hat",
+      "material": "Recycled Polyester & Organic Cotton",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 6,
+      "why_lower_impact": "Accessory with recycled content and low-impact dyes."
+    },
+    {
+      "brand": "Pangaia",
+      "product_name": "Bio-based Parka",
+      "product_type": "jacket",
+      "material": "Plant-based Fibers",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 10,
+      "why_lower_impact": "Plant-derived innovation reduces reliance on fossil resources."
+    },
+    {
+      "brand": "EILEEN FISHER Renew",
+      "product_name": "Repaired Silk Gabardine Dress",
+      "product_type": "dress",
+      "material": "Recycled Silk",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 11,
+      "why_lower_impact": "Regeneration & repair program extends life of high-end garments."
+    },
+    {
+      "brand": "Keen Utility (sustainable line)",
+      "product_name": "Recycled Work Shoe",
+      "product_type": "shoes",
+      "material": "Recycled Rubber & Recycled Mesh",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 11,
+      "why_lower_impact": "Durable footwear with recycled materials suitable for work use."
+    },
+    {
+      "brand": "Vaude",
+      "product_name": "Green Shape Hiking Jacket",
+      "product_type": "jacket",
+      "material": "Recycled Polyamide",
+      "certifications": ["Green Shape", "Bluesign"],
+      "repairability": "High",
+      "estimated_co2": 8,
+      "why_lower_impact": "Outdoor brand focusing on low-impact production and materials."
+    },
+    {
+      "brand": "Patagonia",
+      "product_name": "Worn Wear - Repaired Denim",
+      "product_type": "jeans",
+      "material": "Reused Denim",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 6,
+      "why_lower_impact": "Repair & resale program extends garment life and reduces demand for new items."
+    },
+    {
+      "brand": "Tentree",
+      "product_name": "Bamboo Lounge Shorts",
+      "product_type": "shorts",
+      "material": "Bamboo Viscose",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 7,
+      "why_lower_impact": "Soft, renewable bamboo fibers with low-impact processing."
+    },
+    {
+      "brand": "Patagonia",
+      "product_name": "Down Sweater Vest (Recycled)",
+      "product_type": "vest",
+      "material": "Recycled Down & Nylon",
+      "certifications": ["RDS"],
+      "repairability": "High",
+      "estimated_co2": 9,
+      "why_lower_impact": "Recycled insulation and durable outerwear with repair resources."
+    },
+    {
+      "brand": "Reformation",
+      "product_name": "Tencel Wrap Top",
+      "product_type": "shirt",
+      "material": "Tencel Lyocell",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 7,
+      "why_lower_impact": "Lyocell produced in closed-loop processes reduces chemical waste."
+    },
+    {
+      "brand": "Allbirds",
+      "product_name": "Wool Lounger",
+      "product_type": "slippers",
+      "material": "Merino Wool",
+      "certifications": [],
+      "repairability": "Low",
+      "estimated_co2": 9,
+      "why_lower_impact": "Natural wool materials and simple design reduce waste."
+    },
+    {
+      "brand": "Pact",
+      "product_name": "Organic Cotton Popover Shirt",
+      "product_type": "shirt",
+      "material": "Organic Cotton",
+      "certifications": ["GOTS"],
+      "repairability": "Medium",
+      "estimated_co2": 6,
+      "why_lower_impact": "Fair trade and organic materials for everyday shirts."
+    },
+    {
+      "brand": "Girlfriend Collective",
+      "product_name": "Everyday Recycled Tee",
+      "product_type": "shirt",
+      "material": "Recycled Polyester",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 7,
+      "why_lower_impact": "High recycled content and inclusive sizing increase usage and reduce waste."
+    },
+    {
+      "brand": "Veja",
+      "product_name": "V-12 Knit Runner",
+      "product_type": "shoes",
+      "material": "Recycled Polyester Knit & Wild Rubber",
+      "certifications": ["Fair Trade"],
+      "repairability": "Low",
+      "estimated_co2": 11,
+      "why_lower_impact": "Knit construction reduces waste, and natural rubber is sourced ethically."
+    },
+    {
+      "brand": "Thought Clothing",
+      "product_name": "Merino Wool Crew",
+      "product_type": "sweater",
+      "material": "Merino Wool (responsible)",
+      "certifications": ["OEKO-TEX"],
+      "repairability": "High",
+      "estimated_co2": 9,
+      "why_lower_impact": "Natural fiber knitwear with traceable sourcing."
+    },
+    {
+      "brand": "Nudie Jeans",
+      "product_name": "Coated Organic Denim Jacket",
+      "product_type": "jacket",
+      "material": "Organic Cotton Denim",
+      "certifications": ["GOTS"],
+      "repairability": "High",
+      "estimated_co2": 9,
+      "why_lower_impact": "Durable denim, repair services and organic materials."
+    },
+    {
+      "brand": "Patagonia",
+      "product_name": "Baggies 5\" Recycled Shorts",
+      "product_type": "shorts",
+      "material": "Recycled Polyester",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 7,
+      "why_lower_impact": "Classic product updated with recycled materials for longevity."
+    },
+    {
+      "brand": "Reformation",
+      "product_name": "Upcycled Knit Top",
+      "product_type": "shirt",
+      "material": "Upcycled Fibers",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 8,
+      "why_lower_impact": "Uses fabric scraps and reduces textile waste via upcycling."
+    },
+    {
+      "brand": "Allbirds",
+      "product_name": "M+W Trainer (Collab)",
+      "product_type": "shoes",
+      "material": "Recycled Mesh & Biofoam",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 9,
+      "why_lower_impact": "Collaborative shoe design emphasizing low-carbon manufacturing."
+    },
+    {
+      "brand": "Pangaia",
+      "product_name": "Plant-Fiber Joggers",
+      "product_type": "pants",
+      "material": "Plant-based Fibers",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 9,
+      "why_lower_impact": "Exploring bio-based textiles and low-impact dye tech."
+    },
+    {
+      "brand": "Vaude",
+      "product_name": "Recycled Stretch Trousers",
+      "product_type": "pants",
+      "material": "Recycled Polyamide",
+      "certifications": ["Bluesign"],
+      "repairability": "High",
+      "estimated_co2": 8,
+      "why_lower_impact": "Outdoor brand focusing on responsible materials and repairability."
+    },
+    {
+      "brand": "Tentree",
+      "product_name": "Organic Cotton Lounge Pants",
+      "product_type": "pants",
+      "material": "Organic Cotton",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 6,
+      "why_lower_impact": "Comfy organic basics with tree-planting per purchase."
+    },
+    {
+      "brand": "Reformation",
+      "product_name": "Recycled Knit Jumpsuit",
+      "product_type": "jumpsuit",
+      "material": "Recycled Polyester",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 9,
+      "why_lower_impact": "Multipurpose garments reduce wardrobe complexity and consumption."
+    },
+    {
+      "brand": "Eileen Fisher",
+      "product_name": "Organic Cotton Button-Up",
+      "product_type": "shirt",
+      "material": "Organic Cotton",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 8,
+      "why_lower_impact": "Focus on durable design, take-back & resale programs."
+    },
+    {
+      "brand": "Allbirds",
+      "product_name": "Mizzles Wool Runner (Weather)",
+      "product_type": "shoes",
+      "material": "Merino Wool & Bio-based Foam",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 10,
+      "why_lower_impact": "Weather-ready shoe using natural fibers and lower-carbon midsoles."
+    },
+    {
+      "brand": "Cariuma",
+      "product_name": "Classic OCA Leather-Free",
+      "product_type": "shoes",
+      "material": "Hemp & Recycled Materials",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 9,
+      "why_lower_impact": "Sourcing hemp and recycled rubber to lower environmental load."
+    },
+    {
+      "brand": "MUD Jeans",
+      "product_name": "Recycled Denim Slim",
+      "product_type": "jeans",
+      "material": "Recycled Denim",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 8,
+      "why_lower_impact": "Circular model and recycled denim reduce virgin fiber demand."
+    },
+    {
+      "brand": "Pact",
+      "product_name": "Organic Cotton Shirt (Women)",
+      "product_type": "shirt",
+      "material": "Organic Cotton",
+      "certifications": ["GOTS"],
+      "repairability": "Medium",
+      "estimated_co2": 6,
+      "why_lower_impact": "Simple, certified organic wardrobe staples."
+    },
+    {
+      "brand": "Tentree",
+      "product_name": "Recycled Performance Tee",
+      "product_type": "active_shirt",
+      "material": "Recycled Polyester",
+      "certifications": [],
+      "repairability": "N/A",
+      "estimated_co2": 7,
+      "why_lower_impact": "Performance fabrics with recycled content reduce virgin polymer demand."
+    },
+    {
+      "brand": "Thought Clothing",
+      "product_name": "Organic Cotton Shirt (Mens)",
+      "product_type": "shirt",
+      "material": "Organic Cotton",
+      "certifications": ["OEKO-TEX"],
+      "repairability": "Medium",
+      "estimated_co2": 7,
+      "why_lower_impact": "Ethical & traceable fiber sourcing for everyday shirts."
+    },
+    {
+      "brand": "Patagonia",
+      "product_name": "Capilene Cool Lightweight Boxer",
+      "product_type": "underwear",
+      "material": "Recycled Polyester",
+      "certifications": [],
+      "repairability": "N/A",
+      "estimated_co2": 6,
+      "why_lower_impact": "Performance base layers made from recycled yarns."
+    },
+    {
+      "brand": "EILEEN FISHER",
+      "product_name": "Recycled Silk Scarf",
+      "product_type": "accessory",
+      "material": "Recycled Silk",
+      "certifications": [],
+      "repairability": "N/A",
+      "estimated_co2": 8,
+      "why_lower_impact": "Regenerated fiber program cuts waste in luxury textiles."
+    },
+    {
+      "brand": "Allbirds",
+      "product_name": "Tree Runner 2",
+      "product_type": "shoes",
+      "material": "Tencel & Recycled Foam",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 9,
+      "why_lower_impact": "Continued iteration on lower-carbon sneaker construction."
+    },
+    {
+      "brand": "Veja",
+      "product_name": "Condor Runner",
+      "product_type": "shoes",
+      "material": "Recycled Polyester & Natural Rubber",
+      "certifications": ["Fair Trade"],
+      "repairability": "Low",
+      "estimated_co2": 11,
+      "why_lower_impact": "Transparent sourcing and natural rubber reduces harmful processing."
+    },
+    {
+      "brand": "Patagonia",
+      "product_name": "Black Hole Duffel (Recycled)",
+      "product_type": "bag",
+      "material": "Recycled Polyester",
+      "certifications": [],
+      "repairability": "High",
+      "estimated_co2": 10,
+      "why_lower_impact": "Rugged travel bag using recycled materials and repairability."
+    },
+    {
+      "brand": "Girlfriend Collective",
+      "product_name": "Recycled Bike Shorts",
+      "product_type": "active_bottom",
+      "material": "Recycled Polyester",
+      "certifications": [],
+      "repairability": "N/A",
+      "estimated_co2": 7,
+      "why_lower_impact": "High recycled content active bottoms with inclusive sizing."
+    },
+    {
+      "brand": "Reformation",
+      "product_name": "Tencel Button-Up",
+      "product_type": "shirt",
+      "material": "Tencel Lyocell",
+      "certifications": [],
+      "repairability": "Medium",
+      "estimated_co2": 7,
+      "why_lower_impact": "Lyocell fiber grown & processed using closed-loop methods."
+    }
+  ]
+}

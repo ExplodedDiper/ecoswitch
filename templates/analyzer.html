@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/png" href="/static/logo.png">
+    <title>EcoSwitch Analyzer</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-logo">
+        <h2>EcoSwitch</h2>
+        <img src="/static/logo.png" alt="EcoSwitch Logo">
+    </div>
+    <a href="/">Home</a>
+</nav>
+
+<div class="analyzer-container">
+    <h2>Analyze a Product</h2>
+
+    <input id="productInput" placeholder="Paste product name or URL">
+    <button onclick="analyze()">Analyze</button>
+
+    <div id="result"></div>
+</div>
+
+<script src="/static/analyzer.js"></script>
+
+</body>
+</html>

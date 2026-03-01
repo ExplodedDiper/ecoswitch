@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EcoSwitch</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>EcoSwitch 🌱</h1>
+
+<input id="productInput" placeholder="Paste product name or URL">
+<button onclick="analyze()">Analyze</button>
+
+<div id="result"></div>
+
+<script>
+async function analyze() {
+
+    try {
+
+        const input = document.getElementById("productInput").value;
+
+        const response = await fetch("/analyze", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({input})
+        });
+
+        const data = await response.json();
+
+        // If backend returned error
+        if (data.error) {
+            document.getElementById("result").innerHTML =
+                "<p>System recovered safely. Try again.</p>";
+            return;
+        }
+
+        if (!data.product_metrics) {
+            document.getElementById("result").innerHTML =
+                "<p>No data returned.</p>";
+            return;
+        }
+
+        let alternativesHTML = "";
+
+        if (data.alternatives && data.alternatives.length > 0) {
+
+            data.alternatives.forEach((alt, index) => {
+                alternativesHTML += `
+                    <div style="margin-bottom:20px;">
+                        <h4>Option ${index + 1}</h4>
+                        <p><strong>${alt.brand || ""}</strong></p>
+                        <p>${alt.product_name || ""}</p>
+                        <p>Material: ${alt.material || "-"}</p>
+                        <p>Estimated CO₂: ${alt.estimated_co2 || "-"} kg</p>
+                        <p><em>${alt.why_lower_impact || ""}</em></p>
+                    </div>
+                    <hr>
+                `;
+            });
+
+        } else {
+            alternativesHTML = "<p>No alternatives found.</p>";
+        }
+
+        document.getElementById("result").innerHTML = `
+            <h3>Product Metrics</h3>
+            <p>Material: ${data.product_metrics.material || "-"}</p>
+            <p>Estimated CO₂: ${data.product_metrics.estimated_co2 || "-"} kg</p>
+
+            <h3>Greener Alternatives</h3>
+            ${alternativesHTML}
+
+            <h3>Your Eco Stats</h3>
+            <p>Points: ${data.user.points}</p>
+            <p>CO₂ Saved: ${data.user.co2_saved} kg</p>
+            <p>Level: ${data.user.level}</p>
+
+            <hr>
+            <small>${data.disclaimer}</small>
+        `;
+
+    } catch (err) {
+        document.getElementById("result").innerHTML =
+            "<p>Something went wrong.</p>";
+        console.error(err);
+    }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/png" sizes="512x512" href="/static/logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/logo.png">
+
+    <title>EcoSwitch</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="landing">
+
+    <nav class="navbar">
+    <div class="logo-area">
+        <h2>EcoSwitch</h2>
+        <img src="/static/logo.png" class="logo-img">
+    </div>
+
+    <div class="nav-right">
+        {% if user %}
+            <div class="user-info">
+                {% if user.picture %}
+                    <img src="{{ user.picture }}" class="profile-pic">
+                {% endif %}
+                <span>{{ user.name }}</span>
+                <a href="/logout" class="logout-btn">Logout</a>
+            </div>
+        {% else %}
+            <a href="/login" class="login-btn">Login / Sign Up</a>
+        {% endif %}
+    </div>
+</nav>
+
+<div class="hero-section">
+
+    <div class="logo">
+        <h1>EcoSwitch</h1>
+        <img src="/static/logo.png" alt="EcoSwitch Logo">
+    </div>
+
+    <div class="green-panel">
+        <h2>Save the Planet Through Smarter Fashion</h2>
+        <p>
+            Discover sustainable alternatives for the clothes you love.
+            Small switches. Big impact.
+        </p>
+
+        <a href="/analyzer" class="cta-button">
+            Start Analyzing →
+        </a>
+    </div>
+
+    <!-- Fashion Stickers -->
+    <img src="/static/stickers/hoodie.png" class="sticker hoodie">
+    <img src="/static/stickers/sneakers.png" class="sticker sneakers">
+    <img src="/static/stickers/tote.png" class="sticker tote">
+    <img src="/static/stickers/jeans.png" class="sticker jeans">
+
+</div>
+
+<footer class="footer-disclaimer">
+    All sustainability insights are derived from publicly available datasets and certification bodies. 
+    This tool does not rank, criticize, or endorse brands.
+</footer>
+
+</body>
+</html>

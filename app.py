@@ -1,5 +1,4 @@
 import os
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'  # Allow HTTP for local dev only
 
 from flask import Flask, request, jsonify, render_template, redirect
 from flask_cors import CORS

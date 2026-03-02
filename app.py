@@ -17,6 +17,7 @@ app.secret_key = os.getenv("SECRET_KEY", "eco_switch_super_secret_key")
 # ---------------- HUGGING FACE CONFIG ---------------- #
 
 HF_API_KEY = os.getenv("HF_API_KEY")
+print("HF_API_KEY exists:", HF_API_KEY is not None)
 HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.2"
 HF_URL = f"https://api-inference.huggingface.co/models/{HF_MODEL}"
 HEADERS = {"Authorization": f"Bearer {HF_API_KEY}"} if HF_API_KEY else {}

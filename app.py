@@ -18,7 +18,7 @@ app.secret_key = os.getenv("SECRET_KEY", "eco_switch_super_secret_key")
 
 HF_API_KEY = os.getenv("HF_API_KEY")
 HF_MODEL = "google/flan-t5-base"
-HF_URL = f"https://router.huggingface.co/hf-inference/models/{HF_MODEL}"
+HF_URL = f"https://router.huggingface.co/v1/models/{HF_MODEL}"
 HEADERS = {"Authorization": f"Bearer {HF_API_KEY}"} if HF_API_KEY else {}
 
 

@@ -17,10 +17,12 @@ app.secret_key = os.getenv("SECRET_KEY", "eco_switch_super_secret_key")
 # ---------------- HUGGING FACE CONFIG ---------------- #
 
 HF_API_KEY = os.getenv("HF_API_KEY")
-HF_MODEL = "google/flan-t5-base"
-HF_URL = f"https://api-inference.huggingface.co/models/{HF_MODEL}"
-HEADERS = {"Authorization": f"Bearer {HF_API_KEY}"} if HF_API_KEY else {}
-
+HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.2"
+HF_URL = f"https://router.huggingface.co/v1/chat/completions"
+HEADERS = {
+    "Authorization": f"Bearer {HF_API_KEY}",
+    "Content-Type": "application/json"
+} if HF_API_KEY else {}
 
 print("HF_API_KEY value:", HF_API_KEY)
 
@@ -197,15 +199,8 @@ def update_user(email, co2_original, co2_alt):
 
 def ai_extract_product(product_text):
     if not HF_API_KEY:
-        print("No HF API key found")
+        print("No HF API key")
         return None
-
-    url = f"https://api-inference.huggingface.co/models/{HF_MODEL}"
-
-    headers = {
-        "Authorization": f"Bearer {HF_API_KEY}",
-        "Content-Type": "application/json"
-    }
 
     prompt = f"""
 Extract:
@@ -220,16 +215,17 @@ Product:
 
     try:
         response = requests.post(
-            url,
-            headers=headers,
+            HF_URL,
+            headers=HEADERS,
             json={
-                "inputs": prompt,
-                "parameters": {
-                    "temperature": 0.2,
-                    "max_new_tokens": 150
-                }
+                "model": HF_MODEL,   # 👈 HERE
+                "messages": [
+                    {"role": "user", "content": prompt}
+                ],
+                "temperature": 0.2,
+                "max_tokens": 200
             },
-            timeout=20
+            timeout=30
         )
 
         print("HF STATUS:", response.status_code)
@@ -240,14 +236,13 @@ Product:
 
         result = response.json()
 
-        if isinstance(result, list) and "generated_text" in result[0]:
-            text_output = result[0]["generated_text"]
+        text_output = result["choices"][0]["message"]["content"]
 
-            start = text_output.find("{")
-            end = text_output.rfind("}") + 1
+        start = text_output.find("{")
+        end = text_output.rfind("}") + 1
 
-            if start != -1 and end != -1:
-                return json.loads(text_output[start:end])
+        if start != -1 and end != -1:
+            return json.loads(text_output[start:end])
 
         return None
 

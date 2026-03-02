@@ -17,7 +17,7 @@ app.secret_key = os.getenv("SECRET_KEY", "eco_switch_super_secret_key")
 # ---------------- HUGGING FACE CONFIG ---------------- #
 
 HF_API_KEY = os.getenv("HF_API_KEY")
-HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.2"
+HF_MODEL = "meta-llama/Meta-Llama-3-8B-Instruct"
 HF_URL = f"https://router.huggingface.co/v1/chat/completions"
 HEADERS = {
     "Authorization": f"Bearer {HF_API_KEY}",

@@ -1,17 +1,26 @@
 import os
-
-from flask import Flask, request, jsonify, render_template, redirect
-from flask_cors import CORS
+import requests
 import json
 import hashlib
 
+from flask import Flask, request, jsonify, render_template, redirect
+from flask_cors import CORS
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask_dance.contrib.google import make_google_blueprint, google
 
+
+# ---------------- APP SETUP ---------------- #
+
 app = Flask(__name__)
 CORS(app)
+app.secret_key = os.getenv("SECRET_KEY", "eco_switch_super_secret_key")
 
-app.secret_key = "eco_switch_super_secret_key"
+# ---------------- HUGGING FACE CONFIG ---------------- #
+
+HF_API_KEY = os.getenv("HF_API_KEY")
+HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.2"
+HF_URL = f"https://api-inference.huggingface.co/models/{HF_MODEL}"
+HEADERS = {"Authorization": f"Bearer {HF_API_KEY}"} if HF_API_KEY else {}
 
 # ---------------- LOAD DATA ---------------- #
 
@@ -33,15 +42,18 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
 
+
 class User(UserMixin):
     def __init__(self, email):
         self.id = email
+
 
 @login_manager.user_loader
 def load_user(user_id):
     if user_id in users:
         return User(user_id)
     return None
+
 
 # ---------------- GOOGLE LOGIN ---------------- #
 
@@ -53,10 +65,11 @@ google_bp = make_google_blueprint(
         "openid",
         "https://www.googleapis.com/auth/userinfo.email",
         "https://www.googleapis.com/auth/userinfo.profile",
-    ]
+    ],
 )
 
 app.register_blueprint(google_bp, url_prefix="/login")
+
 
 @app.route("/google_login")
 def google_login():
@@ -71,7 +84,7 @@ def google_login():
     picture = info.get("picture")
 
     if not email:
-        return "Google did not return email. Check OAuth scope."
+        return "Google did not return email."
 
     if email not in users:
         users[email] = {
@@ -80,7 +93,7 @@ def google_login():
             "co2_saved": 0,
             "level": "Eco Beginner",
             "name": name,
-            "picture": picture
+            "picture": picture,
         }
     else:
         users[email]["name"] = name
@@ -91,6 +104,7 @@ def google_login():
 
     login_user(User(email))
     return redirect("/")
+
 
 # ---------------- REGISTER ---------------- #
 
@@ -110,7 +124,7 @@ def register():
             "co2_saved": 0,
             "level": "Eco Beginner",
             "name": name,
-            "picture": None
+            "picture": None,
         }
 
         with open("users.json", "w") as f:
@@ -119,6 +133,7 @@ def register():
         return redirect("/login")
 
     return render_template("register.html")
+
 
 # ---------------- LOGIN ---------------- #
 
@@ -136,6 +151,7 @@ def login():
 
     return render_template("login.html")
 
+
 # ---------------- LOGOUT ---------------- #
 
 @app.route("/logout")
@@ -143,6 +159,7 @@ def login():
 def logout():
     logout_user()
     return redirect("/")
+
 
 # ---------------- PRODUCT LOGIC ---------------- #
 
@@ -156,6 +173,7 @@ def detect_product_type_fallback(text):
     if "legging" in text: return "leggings"
     if "shoe" in text or "sneaker" in text: return "shoes"
     return ""
+
 
 def update_user(email, co2_original, co2_alt):
     diff = max(co2_original - co2_alt, 0)
@@ -172,32 +190,154 @@ def update_user(email, co2_original, co2_alt):
 
     return users[email]
 
+
+# ---------------- AI FUNCTIONS ---------------- #
+
+def ai_extract_product(product_text):
+    if not HF_API_KEY:
+        return None
+
+    prompt = f"""
+Extract:
+- Material
+- Product_Type
+
+Return ONLY valid JSON.
+
+Product:
+{product_text}
+"""
+
+    try:
+        response = requests.post(
+            HF_URL,
+            headers=HEADERS,
+            json={
+                "inputs": prompt,
+                "parameters": {
+                    "temperature": 0.2,
+                    "max_new_tokens": 200,
+                    "return_full_text": False
+                }
+            },
+            timeout=15
+        )
+
+        result = response.json()
+        text_output = result[0].get("generated_text", "")
+
+        start = text_output.find("{")
+        end = text_output.rfind("}") + 1
+
+        if start == -1 or end == -1:
+            return None
+
+        return json.loads(text_output[start:end])
+
+    except:
+        return None
+
+
+def ai_rerank_candidates(product_text, candidates):
+    if not HF_API_KEY or not candidates:
+        return candidates[:3]
+
+    prompt = f"""
+User is buying:
+{product_text}
+
+Here are sustainable alternatives:
+{json.dumps(candidates)}
+
+Pick the 3 best matches.
+Return ONLY valid JSON list.
+"""
+
+    try:
+        response = requests.post(
+            HF_URL,
+            headers=HEADERS,
+            json={
+                "inputs": prompt,
+                "parameters": {
+                    "temperature": 0.2,
+                    "max_new_tokens": 300,
+                    "return_full_text": False
+                }
+            },
+            timeout=20
+        )
+
+        result = response.json()
+        text_output = result[0].get("generated_text", "")
+
+        start = text_output.find("[")
+        end = text_output.rfind("]") + 1
+
+        if start == -1 or end == -1:
+            return candidates[:3]
+
+        return json.loads(text_output[start:end])
+
+    except:
+        return candidates[:3]
+
+
+# ---------------- ANALYZE ROUTE ---------------- #
+
 @app.route("/analyze", methods=["POST"])
 @login_required
 def analyze():
+
     data = request.json
-    user_input = data.get("input", "")
+    product_text = data.get("input", "")
 
-    product_type = detect_product_type_fallback(user_input)
+    # 1️⃣ Extract using AI
+    ai_data = ai_extract_product(product_text)
 
+    material = ""
+    product_type = ""
+
+    if ai_data:
+        material = ai_data.get("Material", "").lower()
+        product_type = ai_data.get("Product_Type", "").lower()
+
+    # 2️⃣ Fallback if AI fails
+    if not product_type:
+        product_type = detect_product_type_fallback(product_text)
+
+    material_info = materials_db.get(material, {"estimated_co2": 10})
+    co2_original = material_info["estimated_co2"]
+
+    # 3️⃣ DB filtering
     db_alts = sustainability_db.get("fashion", [])
+
     filtered = [
         item for item in db_alts
-        if product_type in item.get("product_type", "").lower()
+        if product_type and product_type in item.get("product_type", "").lower()
     ]
 
-    alternatives = sorted(filtered, key=lambda x: x["estimated_co2"])[:3]
+    candidates = sorted(filtered, key=lambda x: x["estimated_co2"])[:5]
 
-    co2_original = 10
+    # 4️⃣ AI reranking
+    alternatives = ai_rerank_candidates(product_text, candidates)
 
+    if not alternatives and candidates:
+        alternatives = candidates[:3]
+
+    # 5️⃣ Update user
     if alternatives:
-        user_data = update_user(current_user.id, co2_original, alternatives[0]["estimated_co2"])
+        user_data = update_user(
+            current_user.id,
+            co2_original,
+            alternatives[0]["estimated_co2"]
+        )
     else:
         user_data = users[current_user.id]
 
     return jsonify({
         "product_metrics": {
-            "material": "-",
+            "material": material or "-",
             "estimated_co2": co2_original,
             "detected_product_type": product_type
         },
@@ -206,20 +346,21 @@ def analyze():
         "disclaimer": "All sustainability insights are derived from publicly available datasets and certification bodies. This tool does not rank, criticize, or endorse brands."
     })
 
+
 # ---------------- MAIN ROUTES ---------------- #
 
 @app.route("/")
 def home():
-    user_data = None
-    if current_user.is_authenticated:
-        user_data = users.get(current_user.id)
+    user_data = users.get(current_user.id) if current_user.is_authenticated else None
     return render_template("home.html", user=user_data)
+
 
 @app.route("/analyzer")
 @login_required
 def analyzer():
     user_data = users.get(current_user.id)
     return render_template("analyzer.html", user=user_data)
+
 
 # ---------------- RUN ---------------- #
 

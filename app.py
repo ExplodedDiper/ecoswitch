@@ -18,7 +18,7 @@ app.secret_key = os.getenv("SECRET_KEY", "eco_switch_super_secret_key")
 
 HF_API_KEY = os.getenv("HF_API_KEY")
 HF_MODEL = "google/flan-t5-base"
-HF_URL = f"https://router.huggingface.co/v1/models/{HF_MODEL}"
+HF_URL = f"https://api-inference.huggingface.co/models/{HF_MODEL}"
 HEADERS = {"Authorization": f"Bearer {HF_API_KEY}"} if HF_API_KEY else {}
 
 
@@ -197,8 +197,15 @@ def update_user(email, co2_original, co2_alt):
 
 def ai_extract_product(product_text):
     if not HF_API_KEY:
-        print("HF_API_KEY missing")
+        print("No HF API key found")
         return None
+
+    url = f"https://api-inference.huggingface.co/models/{HF_MODEL}"
+
+    headers = {
+        "Authorization": f"Bearer {HF_API_KEY}",
+        "Content-Type": "application/json"
+    }
 
     prompt = f"""
 Extract:
@@ -213,23 +220,36 @@ Product:
 
     try:
         response = requests.post(
-            HF_URL,
-            headers=HEADERS,
+            url,
+            headers=headers,
             json={
                 "inputs": prompt,
                 "parameters": {
                     "temperature": 0.2,
-                    "max_new_tokens": 200,
-                    "return_full_text": False
+                    "max_new_tokens": 150
                 }
             },
-            timeout=30
+            timeout=20
         )
 
         print("HF STATUS:", response.status_code)
         print("HF RAW RESPONSE:", response.text)
 
-        return None  # temporarily stop parsing
+        if response.status_code != 200:
+            return None
+
+        result = response.json()
+
+        if isinstance(result, list) and "generated_text" in result[0]:
+            text_output = result[0]["generated_text"]
+
+            start = text_output.find("{")
+            end = text_output.rfind("}") + 1
+
+            if start != -1 and end != -1:
+                return json.loads(text_output[start:end])
+
+        return None
 
     except Exception as e:
         print("HF ERROR:", str(e))

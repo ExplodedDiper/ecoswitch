@@ -8,7 +8,7 @@ from flask_cors import CORS
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask_dance.contrib.google import make_google_blueprint, google
 
-
+print("HF_API_KEY value:", HF_API_KEY)
 # ---------------- APP SETUP ---------------- #
 
 app = Flask(__name__)

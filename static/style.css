@@ -20,6 +20,10 @@ body.landing {
     overflow-x: hidden;
 }
 
+.hero-section {
+    position: relative;
+}
+
 .divider {
     margin: 20px 0;
     font-size: 14px;
@@ -238,21 +242,41 @@ body.landing {
     transform: translateY(-3px);
 }
 
-/* ===== STICKERS ===== */
 .sticker {
     position: absolute;
-    width: 130px;
-    transition: transform 0.4s ease;
+    width: 120px;
+    z-index: 1;
 }
 
-.sticker:hover {
-    transform: scale(1.08) rotate(-3deg);
+/* Hoodie - top left */
+.hoodie {
+    top: 150px;
+    left: 80px;
 }
 
-.hoodie { top: 140px; left: 7%; }
-.sneakers { top: 200px; right: 8%; }
-.tote { bottom: 120px; left: 12%; }
-.jeans { bottom: 60px; right: 10%; }
+/* Jeans - bottom right */
+.jeans {
+    bottom: 120px;
+    right: 100px;
+}
+
+/* Dress - bottom center */
+.dress {
+    bottom: 40px;
+    left: 45%;
+}
+
+/* Chill Guy - bottom left */
+.chill {
+    bottom: 80px;
+    left: 120px;
+    width: 180px;   /* Bigger than others */
+}
+
+.hoodie { transform: rotate(-8deg); }
+.jeans { transform: rotate(6deg); }
+.dress { transform: rotate(-4deg); }
+.chill { transform: rotate(5deg); }
 
 /* ===== FOOTER DISCLAIMER ===== */
 .footer-disclaimer {

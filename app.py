@@ -294,7 +294,7 @@ def analyze():
 
     # 1️⃣ Extract using AI
     ai_data = ai_extract_product(product_text)
-
+    print("AI extraction output:", ai_data)
     material = ""
     product_type = ""
 
@@ -316,7 +316,7 @@ def analyze():
         item for item in db_alts
         if product_type and product_type in item.get("product_type", "").lower()
     ]
-
+    print("Filtered candidates:", filtered)
     candidates = sorted(filtered, key=lambda x: x["estimated_co2"])[:5]
 
     # 4️⃣ AI reranking
@@ -324,7 +324,7 @@ def analyze():
 
     if not alternatives and candidates:
         alternatives = candidates[:3]
-
+    print("Final alternatives:", alternatives)
     # 5️⃣ Update user
     if alternatives:
         user_data = update_user(

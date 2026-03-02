@@ -18,7 +18,7 @@ app.secret_key = os.getenv("SECRET_KEY", "eco_switch_super_secret_key")
 
 HF_API_KEY = os.getenv("HF_API_KEY")
 HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.2"
-HF_URL = f"https://api-inference.huggingface.co/models/{HF_MODEL}"
+HF_URL = f"https://router.huggingface.co/hf-inference/models/{HF_MODEL}"
 HEADERS = {"Authorization": f"Bearer {HF_API_KEY}"} if HF_API_KEY else {}
 
 

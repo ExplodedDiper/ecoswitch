@@ -17,7 +17,6 @@ app.secret_key = os.getenv("SECRET_KEY", "eco_switch_super_secret_key")
 # ---------------- HUGGING FACE CONFIG ---------------- #
 
 HF_API_KEY = os.getenv("HF_API_KEY")
-print("HF_API_KEY exists:", HF_API_KEY is not None)
 HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.2"
 HF_URL = f"https://api-inference.huggingface.co/models/{HF_MODEL}"
 HEADERS = {"Authorization": f"Bearer {HF_API_KEY}"} if HF_API_KEY else {}
@@ -198,6 +197,7 @@ def update_user(email, co2_original, co2_alt):
 
 def ai_extract_product(product_text):
     if not HF_API_KEY:
+        print("HF_API_KEY missing")
         return None
 
     prompt = f"""
@@ -223,23 +223,17 @@ Product:
                     "return_full_text": False
                 }
             },
-            timeout=15
+            timeout=30
         )
 
-        result = response.json()
-        text_output = result[0].get("generated_text", "")
+        print("HF STATUS:", response.status_code)
+        print("HF RAW RESPONSE:", response.text)
 
-        start = text_output.find("{")
-        end = text_output.rfind("}") + 1
+        return None  # temporarily stop parsing
 
-        if start == -1 or end == -1:
-            return None
-
-        return json.loads(text_output[start:end])
-
-    except:
+    except Exception as e:
+        print("HF ERROR:", str(e))
         return None
-
 
 def ai_rerank_candidates(product_text, candidates):
     if not HF_API_KEY or not candidates:

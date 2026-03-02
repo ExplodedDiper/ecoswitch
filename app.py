@@ -8,7 +8,6 @@ from flask_cors import CORS
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask_dance.contrib.google import make_google_blueprint, google
 
-print("HF_API_KEY value:", HF_API_KEY)
 # ---------------- APP SETUP ---------------- #
 
 app = Flask(__name__)
@@ -21,6 +20,9 @@ HF_API_KEY = os.getenv("HF_API_KEY")
 HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.2"
 HF_URL = f"https://api-inference.huggingface.co/models/{HF_MODEL}"
 HEADERS = {"Authorization": f"Bearer {HF_API_KEY}"} if HF_API_KEY else {}
+
+
+print("HF_API_KEY value:", HF_API_KEY)
 
 # ---------------- LOAD DATA ---------------- #
 

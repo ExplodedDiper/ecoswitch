@@ -218,29 +218,12 @@ Product:
             HF_URL,
             headers=HEADERS,
             json={
-                "model": HF_MODEL,
+                "model": HF_MODEL,   # 👈 HERE
                 "messages": [
-                    {
-                        "role": "system",
-                        "content": "You are a strict JSON extractor. You must return ONLY valid JSON with no explanation."
-                    },
-                    {
-                        "role": "user",
-                        "content": f"""
-        Extract the following fields from this product description:
-        - Material
-        - Product_Type
-
-        Return ONLY valid JSON like this:
-        {{"Material": "...", "Product_Type": "..."}}
-
-        Product:
-        {product_text}
-        """
-                    }
+                    {"role": "user", "content": prompt}
                 ],
-                "temperature": 0,
-                "max_tokens": 150
+                "temperature": 0.2,
+                "max_tokens": 200
             },
             timeout=30
         )

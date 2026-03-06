@@ -1,11 +1,11 @@
 import os
-import requests
 import json
 import hashlib
+import requests
 
 from flask import Flask, request, jsonify, render_template, redirect
-from flask_cors import CORS
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+from flask_cors import CORS
 from flask_dance.contrib.google import make_google_blueprint, google
 
 
@@ -13,7 +13,8 @@ from flask_dance.contrib.google import make_google_blueprint, google
 
 app = Flask(__name__)
 CORS(app)
-app.secret_key = os.getenv("SECRET_KEY", "eco_switch_super_secret_key")
+
+app.secret_key = os.getenv("SECRET_KEY", "eco_switch_secret")
 
 
 # ---------------- API CONFIG ---------------- #
@@ -31,6 +32,7 @@ TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 TAVILY_URL = "https://api.tavily.com/search"
 
 print("HF_API_KEY loaded:", bool(HF_API_KEY))
+print("TAVILY_API_KEY loaded:", bool(TAVILY_API_KEY))
 
 
 # ---------------- LOAD DATA ---------------- #
@@ -184,6 +186,7 @@ def detect_product_type_fallback(text):
     if "shirt" in text: return "shirt"
     if "jean" in text: return "jeans"
     if "sweater" in text: return "sweater"
+    if "sneaker" in text or "shoe" in text: return "sneakers"
 
     return ""
 
@@ -206,7 +209,7 @@ def update_user(email, co2_original, co2_alt):
     return users[email]
 
 
-# ---------------- AI FUNCTIONS ---------------- #
+# ---------------- AI EXTRACTION ---------------- #
 
 def ai_extract_product(user_input):
 
@@ -216,11 +219,10 @@ def ai_extract_product(user_input):
     prompt = f"""
 Extract Material and Product_Type.
 
-Return ONLY JSON like:
+Return JSON:
 {{"Material":"cotton","Product_Type":"hoodie"}}
 
-Product:
-{user_input}
+Product: {user_input}
 """
 
     try:
@@ -237,8 +239,6 @@ Product:
             timeout=30
         )
 
-        print("HF STATUS:", response.status_code)
-
         if response.status_code != 200:
             return None
 
@@ -249,18 +249,13 @@ Product:
         start = text.find("{")
         end = text.rfind("}") + 1
 
-        if start != -1 and end != -1:
-            try:
-                return json.loads(text[start:end])
-            except:
-                print("JSON parsing failed")
-                return None
-
-        return None
+        if start != -1:
+            return json.loads(text[start:end])
 
     except Exception as e:
-        print("HF error:", e)
-        return None
+        print("AI extraction error:", e)
+
+    return None
 
 
 # ---------------- TAVILY SEARCH ---------------- #
@@ -271,12 +266,8 @@ def tavily_search(query):
         print("No Tavily key")
         return []
 
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {TAVILY_API_KEY}"
-    }
-
     payload = {
+        "api_key": TAVILY_API_KEY,
         "query": query,
         "search_depth": "advanced",
         "max_results": 5
@@ -284,14 +275,7 @@ def tavily_search(query):
 
     try:
 
-        response = requests.post(
-            TAVILY_URL,
-            headers=headers,
-            json=payload
-        )
-
-        print("Tavily status:", response.status_code)
-        print("Tavily raw:", response.text)
+        response = requests.post(TAVILY_URL, json=payload)
 
         data = response.json()
 
@@ -310,6 +294,7 @@ def tavily_search(query):
         print("Tavily error:", e)
         return []
 
+
 # ---------------- AI RANK WEB RESULTS ---------------- #
 
 def ai_rank_web_results(user_product, search_results):
@@ -318,17 +303,16 @@ def ai_rank_web_results(user_product, search_results):
         return []
 
     prompt = f"""
-User wants:
-{user_product}
+User wants: {user_product}
 
-Here are internet results:
+Internet results:
 {json.dumps(search_results)}
 
-Choose the 3 most sustainable alternatives.
+Pick 3 sustainable alternatives.
 
-Return JSON list:
+Return JSON:
 [
-{{"product_name":"...","brand":"...","reason":"..."}}
+{{"product_name":"...","brand":"...","url":"...","reason":"..."}}
 ]
 """
 
@@ -355,21 +339,20 @@ Return JSON list:
         start = text.find("[")
         end = text.rfind("]") + 1
 
-        if start != -1:
-            try:
-                return json.loads(text[start:end])
-            except:
-                print("JSON parsing failed")
-                return None
+        parsed = json.loads(text[start:end])
 
-        return []
+        for i, alt in enumerate(parsed):
+            if not alt.get("url") and i < len(search_results):
+                alt["url"] = search_results[i]["url"]
+
+        return parsed
 
     except Exception as e:
         print("AI ranking error:", e)
         return []
 
 
-# ---------------- ANALYZE ROUTE ---------------- #
+# ---------------- ANALYZE ---------------- #
 
 @app.route("/analyze", methods=["POST"])
 @login_required
@@ -378,12 +361,7 @@ def analyze():
     data = request.json
     user_input = data.get("input", "")
 
-    print("User input:", user_input)
-
-    # AI extraction
     ai_data = ai_extract_product(user_input)
-
-    print("AI extraction:", ai_data)
 
     material = ""
     product_type = ""
@@ -399,36 +377,23 @@ def analyze():
 
     co2_original = material_info["estimated_co2"]
 
-    # -------- REAL TIME WEB SEARCH -------- #
-
-    query = f"sustainable {product_type} {material}"
-
-    print("Running Tavily search:", query)
+    query = f"best sustainable {product_type} brands eco friendly {product_type}"
 
     search_results = tavily_search(query)
 
-    print("Web results:", search_results)
-
     alternatives = ai_rank_web_results(user_input, search_results)
 
-    # -------- DATABASE FALLBACK -------- #
-
     if not alternatives:
-
-        print("Using database fallback")
 
         db_alts = sustainability_db.get("fashion", [])
 
         filtered = [
             item for item in db_alts
-            if product_type in item.get("product_type", "").lower()
+            if item.get("product_type","").lower() == product_type
         ]
 
         alternatives = sorted(filtered, key=lambda x: x["estimated_co2"])[:3]
 
-    print("Final alternatives:", alternatives)
-
-    # update user
     if alternatives:
         user_data = update_user(
             current_user.id,
@@ -467,4 +432,5 @@ def analyzer():
 # ---------------- RUN ---------------- #
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)

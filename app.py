@@ -15,7 +15,10 @@ CORS(app)
 app.secret_key = os.getenv("SECRET_KEY", "eco_switch_super_secret_key")
 
 # ---------------- HUGGING FACE CONFIG ---------------- #
+# ---------------- TAVILY SEARCH CONFIG ---------------- #
 
+TAVILY_API_KEY = os.getenv("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")
+TAVILY_URL = "https://api.tavily.com/search"
 HF_API_KEY = os.getenv("HF_API_KEY")
 HF_MODEL = "meta-llama/Meta-Llama-3-8B-Instruct"
 HF_URL = f"https://router.huggingface.co/v1/chat/completions"
@@ -294,7 +297,88 @@ Return ONLY valid JSON list.
     except:
         return candidates[:3]
 
+def tavily_search(query):
+    if not TAVILY_API_KEY:
+        print("No Tavily key")
+        return []
 
+    payload = {
+        "api_key": TAVILY_API_KEY,
+        "query": query,
+        "max_results": 5
+    }
+
+    try:
+        response = requests.post(TAVILY_URL, json=payload)
+
+        print("Tavily Status:", response.status_code)
+
+        data = response.json()
+
+        results = data.get("results", [])
+
+        simplified = []
+
+        for r in results:
+            simplified.append({
+                "title": r.get("title"),
+                "url": r.get("url"),
+                "content": r.get("content")
+            })
+
+        return simplified
+
+    except Exception as e:
+        print("Tavily error:", e)
+        return []
+    
+def ai_rank_web_results(user_product, search_results):
+    if not search_results:
+        return []
+
+    prompt = f"""
+User is buying:
+{user_product}
+
+Here are product results from the internet:
+
+{json.dumps(search_results)}
+
+Pick the 3 most sustainable alternatives.
+
+Return JSON list like:
+[
+{{"product_name": "...", "brand": "...", "reason": "..."}}
+]
+"""
+
+    try:
+        response = requests.post(
+            HF_URL,
+            headers=HEADERS,
+            json={
+                "model": HF_MODEL,
+                "messages": [
+                    {"role": "system", "content": "Return only JSON."},
+                    {"role": "user", "content": prompt}
+                ],
+                "temperature": 0.2,
+                "max_tokens": 300
+            }
+        )
+
+        result = response.json()
+
+        text = result["choices"][0]["message"]["content"]
+
+        start = text.find("[")
+        end = text.rfind("]") + 1
+
+        return json.loads(text[start:end])
+
+    except Exception as e:
+        print("AI ranking error:", e)
+        return []
 # ---------------- ANALYZE ROUTE ---------------- #
 
 @app.route("/analyze", methods=["POST"])
@@ -321,15 +405,31 @@ def analyze():
     material_info = materials_db.get(material, {"estimated_co2": 10})
     co2_original = material_info["estimated_co2"]
 
-    # 3️⃣ DB filtering
-    db_alts = sustainability_db.get("fashion", [])
+    # --------- WEB SEARCH ---------
 
-    filtered = [
-        item for item in db_alts
-        if product_type and product_type in item.get("product_type", "").lower()
-    ]
-    print("Filtered candidates:", filtered)
-    candidates = sorted(filtered, key=lambda x: x["estimated_co2"])[:5]
+    query = f"sustainable {product_type} {material}"
+
+    search_results = tavily_search(query)
+
+    print("Web search results:", search_results)
+
+    ai_alternatives = ai_rank_web_results(user_input, search_results)
+
+    # --------- FALLBACK LOGIC ---------
+
+    if ai_alternatives:
+        alternatives = ai_alternatives
+    else:
+        print("Using database fallback")
+
+        db_alts = sustainability_db.get("fashion", [])
+
+        filtered = [
+            item for item in db_alts
+            if product_type in item.get("product_type", "").lower()
+        ]
+
+        alternatives = sorted(filtered, key=lambda x: x["estimated_co2"])[:3]
 
     # 4️⃣ AI reranking
     alternatives = ai_rerank_candidates(product_text, candidates)

@@ -250,7 +250,11 @@ Product:
         end = text.rfind("}") + 1
 
         if start != -1 and end != -1:
-            return json.loads(text[start:end])
+            try:
+                return json.loads(text[start:end])
+            except:
+                print("JSON parsing failed")
+                return None
 
         return None
 
@@ -264,26 +268,36 @@ Product:
 def tavily_search(query):
 
     if not TAVILY_API_KEY:
+        print("No Tavily key")
         return []
 
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {TAVILY_API_KEY}"
+    }
+
     payload = {
-        "api_key": TAVILY_API_KEY,
         "query": query,
+        "search_depth": "advanced",
         "max_results": 5
     }
 
     try:
 
-        response = requests.post(TAVILY_URL, json=payload)
+        response = requests.post(
+            TAVILY_URL,
+            headers=headers,
+            json=payload
+        )
 
         print("Tavily status:", response.status_code)
+        print("Tavily raw:", response.text)
 
         data = response.json()
 
         results = []
 
         for r in data.get("results", []):
-
             results.append({
                 "title": r.get("title"),
                 "url": r.get("url"),
@@ -295,7 +309,6 @@ def tavily_search(query):
     except Exception as e:
         print("Tavily error:", e)
         return []
-
 
 # ---------------- AI RANK WEB RESULTS ---------------- #
 
@@ -343,7 +356,11 @@ Return JSON list:
         end = text.rfind("]") + 1
 
         if start != -1:
-            return json.loads(text[start:end])
+            try:
+                return json.loads(text[start:end])
+            except:
+                print("JSON parsing failed")
+                return None
 
         return []
 

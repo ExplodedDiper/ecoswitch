@@ -17,7 +17,7 @@ app.secret_key = os.getenv("SECRET_KEY", "eco_switch_super_secret_key")
 # ---------------- HUGGING FACE CONFIG ---------------- #
 # ---------------- TAVILY SEARCH CONFIG ---------------- #
 
-TAVILY_API_KEY = os.getenv("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")
+TAVILY_API_KEY = "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"
 TAVILY_URL = "https://api.tavily.com/search"
 HF_API_KEY = os.getenv("HF_API_KEY")
 HF_MODEL = "meta-llama/Meta-Llama-3-8B-Instruct"

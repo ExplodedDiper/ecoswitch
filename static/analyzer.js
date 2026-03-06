@@ -33,14 +33,21 @@ async function analyze() {
 
     if (data.alternatives && data.alternatives.length > 0) {
         data.alternatives.forEach((alt, index) => {
+
+            const link = alt.url 
+                ? `<a href="${alt.url}" target="_blank" style="color:#2e7d32;font-weight:bold;">View Product</a>`
+                : "";
+
+            const reason = alt.reason || alt.why_lower_impact || "";
+
             html += `
                 <div style="margin-bottom: 20px;">
                     <h4>Option ${index + 1}</h4>
-                    <p><strong>${alt.brand}</strong></p>
-                    <p>${alt.product_name}</p>
-                    <p>Material: ${alt.material}</p>
-                    <p>Estimated CO₂: ${alt.estimated_co2} kg</p>
-                    <p><em>${alt.why_lower_impact}</em></p>
+                    <p><strong>${alt.brand} — ${alt.product_name}</strong></p>
+
+                    ${link}
+
+                    <p><em>${reason}</em></p>
                     <hr>
                 </div>
             `;

@@ -13,7 +13,6 @@ from flask_dance.contrib.google import make_google_blueprint, google
 
 app = Flask(__name__)
 CORS(app)
-
 app.secret_key = os.getenv("SECRET_KEY", "eco_switch_secret")
 
 
@@ -249,8 +248,11 @@ Product: {user_input}
         start = text.find("{")
         end = text.rfind("}") + 1
 
-        if start != -1:
-            return json.loads(text[start:end])
+        if start != -1 and end != -1:
+            try:
+                return json.loads(text[start:end])
+            except:
+                return None
 
     except Exception as e:
         print("AI extraction error:", e)
@@ -263,7 +265,6 @@ Product: {user_input}
 def tavily_search(query):
 
     if not TAVILY_API_KEY:
-        print("No Tavily key")
         return []
 
     payload = {
@@ -275,7 +276,7 @@ def tavily_search(query):
 
     try:
 
-        response = requests.post(TAVILY_URL, json=payload)
+        response = requests.post(TAVILY_URL, json=payload, timeout=20)
 
         data = response.json()
 
@@ -342,8 +343,12 @@ Return JSON:
         parsed = json.loads(text[start:end])
 
         for i, alt in enumerate(parsed):
+
             if not alt.get("url") and i < len(search_results):
                 alt["url"] = search_results[i]["url"]
+
+            if "reason" not in alt:
+                alt["reason"] = "Lower environmental impact product."
 
         return parsed
 
@@ -358,7 +363,7 @@ Return JSON:
 @login_required
 def analyze():
 
-    data = request.json
+    data = request.get_json(silent=True) or {}
     user_input = data.get("input", "")
 
     ai_data = ai_extract_product(user_input)

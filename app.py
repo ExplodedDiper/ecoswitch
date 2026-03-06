@@ -200,7 +200,7 @@ def update_user(email, co2_original, co2_alt):
 
 # ---------------- AI FUNCTIONS ---------------- #
 
-def ai_extract_product(product_text):
+def ai_extract_product(user_input):
     if not HF_API_KEY:
         print("No HF API key")
         return None
@@ -213,7 +213,7 @@ Extract:
 Return ONLY valid JSON.
 
 Product:
-{product_text}
+{user_input}
 """
 
     try:
@@ -253,13 +253,13 @@ Product:
         print("HF ERROR:", str(e))
         return None
 
-def ai_rerank_candidates(product_text, candidates):
+def ai_rerank_candidates(user_input, candidates):
     if not HF_API_KEY or not candidates:
         return candidates[:3]
 
     prompt = f"""
 User is buying:
-{product_text}
+{user_input}
 
 Here are sustainable alternatives:
 {json.dumps(candidates)}
@@ -386,10 +386,10 @@ Return JSON list like:
 def analyze():
 
     data = request.json
-    product_text = data.get("input", "")
+    user_input = data.get("input", "")
 
     # 1️⃣ Extract using AI
-    ai_data = ai_extract_product(product_text)
+    ai_data = ai_extract_product()
     print("AI extraction output:", ai_data)
     material = ""
     product_type = ""
@@ -400,7 +400,7 @@ def analyze():
 
     # 2️⃣ Fallback if AI fails
     if not product_type:
-        product_type = detect_product_type_fallback(product_text)
+        product_type = detect_product_type_fallback(user_input)
 
     material_info = materials_db.get(material, {"estimated_co2": 10})
     co2_original = material_info["estimated_co2"]
@@ -432,7 +432,7 @@ def analyze():
         alternatives = sorted(filtered, key=lambda x: x["estimated_co2"])[:3]
 
     # 4️⃣ AI reranking
-    alternatives = ai_rerank_candidates(product_text, candidates)
+    alternatives = ai_rerank_candidates(user_input, candidates)
 
     if not alternatives and candidates:
         alternatives = candidates[:3]

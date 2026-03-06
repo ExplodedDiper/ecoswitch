@@ -243,10 +243,22 @@ Product: {user_input}
 
         result = response.json()
 
-        text = result["choices"][0]["message"]["content"]
+        text = result["choices"][0]["message"]["content"].strip()
 
-        start = text.find("{")
-        end = text.rfind("}") + 1
+        start = text.find("[")
+        end = text.rfind("]")
+
+        if start == -1 or end == -1:
+            print("AI returned non-JSON:", text)
+            return []
+
+        json_text = text[start:end+1]
+
+        try:
+            parsed = json.loads(json_text)
+        except Exception as e:
+            print("JSON parsing failed:", json_text)
+            return []
 
         if start != -1 and end != -1:
             try:

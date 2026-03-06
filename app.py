@@ -8,26 +8,30 @@ from flask_cors import CORS
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask_dance.contrib.google import make_google_blueprint, google
 
+
 # ---------------- APP SETUP ---------------- #
 
 app = Flask(__name__)
 CORS(app)
 app.secret_key = os.getenv("SECRET_KEY", "eco_switch_super_secret_key")
 
-# ---------------- HUGGING FACE CONFIG ---------------- #
-# ---------------- TAVILY SEARCH CONFIG ---------------- #
 
-TAVILY_API_KEY = "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"
-TAVILY_URL = "https://api.tavily.com/search"
+# ---------------- API CONFIG ---------------- #
+
 HF_API_KEY = os.getenv("HF_API_KEY")
 HF_MODEL = "meta-llama/Meta-Llama-3-8B-Instruct"
-HF_URL = f"https://router.huggingface.co/v1/chat/completions"
+HF_URL = "https://router.huggingface.co/v1/chat/completions"
+
 HEADERS = {
     "Authorization": f"Bearer {HF_API_KEY}",
     "Content-Type": "application/json"
 } if HF_API_KEY else {}
 
-print("HF_API_KEY value:", HF_API_KEY)
+TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
+TAVILY_URL = "https://api.tavily.com/search"
+
+print("HF_API_KEY loaded:", bool(HF_API_KEY))
+
 
 # ---------------- LOAD DATA ---------------- #
 
@@ -42,6 +46,7 @@ with open("sustainability_db.json") as f:
 
 with open("materials_impact.json") as f:
     materials_db = json.load(f)
+
 
 # ---------------- LOGIN SYSTEM ---------------- #
 
@@ -80,6 +85,7 @@ app.register_blueprint(google_bp, url_prefix="/login")
 
 @app.route("/google_login")
 def google_login():
+
     if not google.authorized:
         return redirect("/login/google")
 
@@ -90,9 +96,6 @@ def google_login():
     name = info.get("name")
     picture = info.get("picture")
 
-    if not email:
-        return "Google did not return email."
-
     if email not in users:
         users[email] = {
             "password": None,
@@ -102,14 +105,12 @@ def google_login():
             "name": name,
             "picture": picture,
         }
-    else:
-        users[email]["name"] = name
-        users[email]["picture"] = picture
+
+    login_user(User(email))
 
     with open("users.json", "w") as f:
         json.dump(users, f, indent=2)
 
-    login_user(User(email))
     return redirect("/")
 
 
@@ -117,7 +118,9 @@ def google_login():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+
     if request.method == "POST":
+
         email = request.form["email"]
         name = request.form["name"]
         password = hashlib.sha256(request.form["password"].encode()).hexdigest()
@@ -146,7 +149,9 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+
     if request.method == "POST":
+
         email = request.form["email"]
         password = hashlib.sha256(request.form["password"].encode()).hexdigest()
 
@@ -168,22 +173,25 @@ def logout():
     return redirect("/")
 
 
-# ---------------- PRODUCT LOGIC ---------------- #
+# ---------------- UTILITIES ---------------- #
 
 def detect_product_type_fallback(text):
+
     text = text.lower()
+
     if "hoodie" in text: return "hoodie"
     if "jacket" in text: return "jacket"
-    if "shirt" in text or "t-shirt" in text: return "shirt"
+    if "shirt" in text: return "shirt"
     if "jean" in text: return "jeans"
     if "sweater" in text: return "sweater"
-    if "legging" in text: return "leggings"
-    if "shoe" in text or "sneaker" in text: return "shoes"
+
     return ""
 
 
 def update_user(email, co2_original, co2_alt):
+
     diff = max(co2_original - co2_alt, 0)
+
     users[email]["points"] += diff * 5
     users[email]["co2_saved"] += diff
 
@@ -201,30 +209,28 @@ def update_user(email, co2_original, co2_alt):
 # ---------------- AI FUNCTIONS ---------------- #
 
 def ai_extract_product(user_input):
+
     if not HF_API_KEY:
-        print("No HF API key")
         return None
 
     prompt = f"""
-Extract:
-- Material
-- Product_Type
+Extract Material and Product_Type.
 
-Return ONLY valid JSON.
+Return ONLY JSON like:
+{{"Material":"cotton","Product_Type":"hoodie"}}
 
 Product:
 {user_input}
 """
 
     try:
+
         response = requests.post(
             HF_URL,
             headers=HEADERS,
             json={
-                "model": HF_MODEL,   # 👈 HERE
-                "messages": [
-                    {"role": "user", "content": prompt}
-                ],
+                "model": HF_MODEL,
+                "messages": [{"role": "user", "content": prompt}],
                 "temperature": 0.2,
                 "max_tokens": 200
             },
@@ -232,74 +238,32 @@ Product:
         )
 
         print("HF STATUS:", response.status_code)
-        print("HF RAW RESPONSE:", response.text)
 
         if response.status_code != 200:
             return None
 
         result = response.json()
 
-        text_output = result["choices"][0]["message"]["content"]
+        text = result["choices"][0]["message"]["content"]
 
-        start = text_output.find("{")
-        end = text_output.rfind("}") + 1
+        start = text.find("{")
+        end = text.rfind("}") + 1
 
         if start != -1 and end != -1:
-            return json.loads(text_output[start:end])
+            return json.loads(text[start:end])
 
         return None
 
     except Exception as e:
-        print("HF ERROR:", str(e))
+        print("HF error:", e)
         return None
 
-def ai_rerank_candidates(user_input, candidates):
-    if not HF_API_KEY or not candidates:
-        return candidates[:3]
 
-    prompt = f"""
-User is buying:
-{user_input}
-
-Here are sustainable alternatives:
-{json.dumps(candidates)}
-
-Pick the 3 best matches.
-Return ONLY valid JSON list.
-"""
-
-    try:
-        response = requests.post(
-            HF_URL,
-            headers=HEADERS,
-            json={
-                "inputs": prompt,
-                "parameters": {
-                    "temperature": 0.2,
-                    "max_new_tokens": 300,
-                    "return_full_text": False
-                }
-            },
-            timeout=20
-        )
-
-        result = response.json()
-        text_output = result[0].get("generated_text", "")
-
-        start = text_output.find("[")
-        end = text_output.rfind("]") + 1
-
-        if start == -1 or end == -1:
-            return candidates[:3]
-
-        return json.loads(text_output[start:end])
-
-    except:
-        return candidates[:3]
+# ---------------- TAVILY SEARCH ---------------- #
 
 def tavily_search(query):
+
     if not TAVILY_API_KEY:
-        print("No Tavily key")
         return []
 
     payload = {
@@ -309,50 +273,54 @@ def tavily_search(query):
     }
 
     try:
+
         response = requests.post(TAVILY_URL, json=payload)
 
-        print("Tavily Status:", response.status_code)
+        print("Tavily status:", response.status_code)
 
         data = response.json()
 
-        results = data.get("results", [])
+        results = []
 
-        simplified = []
+        for r in data.get("results", []):
 
-        for r in results:
-            simplified.append({
+            results.append({
                 "title": r.get("title"),
                 "url": r.get("url"),
                 "content": r.get("content")
             })
 
-        return simplified
+        return results
 
     except Exception as e:
         print("Tavily error:", e)
         return []
-    
+
+
+# ---------------- AI RANK WEB RESULTS ---------------- #
+
 def ai_rank_web_results(user_product, search_results):
+
     if not search_results:
         return []
 
     prompt = f"""
-User is buying:
+User wants:
 {user_product}
 
-Here are product results from the internet:
-
+Here are internet results:
 {json.dumps(search_results)}
 
-Pick the 3 most sustainable alternatives.
+Choose the 3 most sustainable alternatives.
 
-Return JSON list like:
+Return JSON list:
 [
-{{"product_name": "...", "brand": "...", "reason": "..."}}
+{{"product_name":"...","brand":"...","reason":"..."}}
 ]
 """
 
     try:
+
         response = requests.post(
             HF_URL,
             headers=HEADERS,
@@ -374,11 +342,16 @@ Return JSON list like:
         start = text.find("[")
         end = text.rfind("]") + 1
 
-        return json.loads(text[start:end])
+        if start != -1:
+            return json.loads(text[start:end])
+
+        return []
 
     except Exception as e:
         print("AI ranking error:", e)
         return []
+
+
 # ---------------- ANALYZE ROUTE ---------------- #
 
 @app.route("/analyze", methods=["POST"])
@@ -388,9 +361,13 @@ def analyze():
     data = request.json
     user_input = data.get("input", "")
 
-    # 1️⃣ Extract using AI
-    ai_data = ai_extract_product()
-    print("AI extraction output:", ai_data)
+    print("User input:", user_input)
+
+    # AI extraction
+    ai_data = ai_extract_product(user_input)
+
+    print("AI extraction:", ai_data)
+
     material = ""
     product_type = ""
 
@@ -398,28 +375,29 @@ def analyze():
         material = ai_data.get("Material", "").lower()
         product_type = ai_data.get("Product_Type", "").lower()
 
-    # 2️⃣ Fallback if AI fails
     if not product_type:
         product_type = detect_product_type_fallback(user_input)
 
     material_info = materials_db.get(material, {"estimated_co2": 10})
+
     co2_original = material_info["estimated_co2"]
 
-    # --------- WEB SEARCH ---------
+    # -------- REAL TIME WEB SEARCH -------- #
 
     query = f"sustainable {product_type} {material}"
 
+    print("Running Tavily search:", query)
+
     search_results = tavily_search(query)
 
-    print("Web search results:", search_results)
+    print("Web results:", search_results)
 
-    ai_alternatives = ai_rank_web_results(user_input, search_results)
+    alternatives = ai_rank_web_results(user_input, search_results)
 
-    # --------- FALLBACK LOGIC ---------
+    # -------- DATABASE FALLBACK -------- #
 
-    if ai_alternatives:
-        alternatives = ai_alternatives
-    else:
+    if not alternatives:
+
         print("Using database fallback")
 
         db_alts = sustainability_db.get("fashion", [])
@@ -431,18 +409,14 @@ def analyze():
 
         alternatives = sorted(filtered, key=lambda x: x["estimated_co2"])[:3]
 
-    # 4️⃣ AI reranking
-    alternatives = ai_rerank_candidates(user_input, candidates)
-
-    if not alternatives and candidates:
-        alternatives = candidates[:3]
     print("Final alternatives:", alternatives)
-    # 5️⃣ Update user
+
+    # update user
     if alternatives:
         user_data = update_user(
             current_user.id,
             co2_original,
-            alternatives[0]["estimated_co2"]
+            alternatives[0].get("estimated_co2", 5)
         )
     else:
         user_data = users[current_user.id]
@@ -454,8 +428,7 @@ def analyze():
             "detected_product_type": product_type
         },
         "alternatives": alternatives,
-        "user": user_data,
-        "disclaimer": "All sustainability insights are derived from publicly available datasets and certification bodies. This tool does not rank, criticize, or endorse brands."
+        "user": user_data
     })
 
 

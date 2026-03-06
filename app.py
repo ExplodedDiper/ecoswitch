@@ -316,16 +316,22 @@ def ai_rank_web_results(user_product, search_results):
         return []
 
     prompt = f"""
-User wants: {user_product}
+User wants a sustainable alternative to:
+{user_product}
 
-Internet results:
+Here are web results:
 {json.dumps(search_results)}
 
-Pick 3 sustainable alternatives.
+Pick the 3 best sustainable product alternatives.
 
-Return JSON:
+Return ONLY JSON:
+
 [
-{{"product_name":"...","brand":"...","url":"...","reason":"..."}}
+ {{
+   "product_name":"...",
+   "brand":"...",
+   "reason":"..."
+ }}
 ]
 """
 
@@ -350,17 +356,20 @@ Return JSON:
         text = result["choices"][0]["message"]["content"]
 
         start = text.find("[")
-        end = text.rfind("]") + 1
+        end = text.rfind("]")
 
-        parsed = json.loads(text[start:end])
+        if start == -1 or end == -1:
+            return []
 
+        parsed = json.loads(text[start:end+1])
+
+        # attach urls from search results
         for i, alt in enumerate(parsed):
 
-            if not alt.get("url") and i < len(search_results):
+            if i < len(search_results):
                 alt["url"] = search_results[i]["url"]
-
-            if "reason" not in alt:
-                alt["reason"] = "Lower environmental impact product."
+            else:
+                alt["url"] = ""
 
         return parsed
 
@@ -394,7 +403,7 @@ def analyze():
 
     co2_original = material_info["estimated_co2"]
 
-    query = f"best sustainable {product_type} brands eco friendly {product_type}"
+    query = f"buy sustainable {product_type} eco friendly {product_type}"
 
     search_results = tavily_search(query)
 
@@ -411,6 +420,9 @@ def analyze():
 
         alternatives = sorted(filtered, key=lambda x: x["estimated_co2"])[:3]
 
+        for alt in alternatives:
+            alt["url"] = ""
+            alt["reason"] = alt.get("why_lower_impact", "")
     if alternatives:
         user_data = update_user(
             current_user.id,

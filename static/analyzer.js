@@ -34,22 +34,25 @@ async function analyze() {
     if (data.alternatives && data.alternatives.length > 0) {
         data.alternatives.forEach((alt, index) => {
 
-            const link = alt.url 
-                ? `<a href="${alt.url}" target="_blank" style="color:#2e7d32;font-weight:bold;">View Product</a>`
-                : "";
-
-            const reason = alt.reason || alt.why_lower_impact || "";
-
             html += `
-                <div style="margin-bottom: 20px;">
-                    <h4>Option ${index + 1}</h4>
-                    <p><strong>${alt.brand} — ${alt.product_name}</strong></p>
+            <div style="margin-bottom:20px;">
+                <h4>Option ${index+1}</h4>
 
-                    ${link}
+                <p><strong>${alt.brand}</strong> — ${alt.product_name}</p>
 
-                    <p><em>${reason}</em></p>
-                    <hr>
-                </div>
+                ${alt.url ? `
+                <p>
+                    <a href="${alt.url}" target="_blank"
+                    style="color:#2F5D2E;font-weight:600;text-decoration:none;">
+                    View Product →
+                    </a>
+                </p>
+                ` : ""}
+
+                <p><em>${alt.reason || alt.why_lower_impact || ""}</em></p>
+
+                <hr>
+            </div>
             `;
         });
     } else {
@@ -62,7 +65,7 @@ async function analyze() {
         <p>CO₂ Saved: ${data.user.co2_saved} kg</p>
         <p>Level: ${data.user.level}</p>
         <hr>
-        <small>${data.disclaimer}</small>
+        ${data.disclaimer ? `<small>${data.disclaimer}</small>` : ""}
     `;
 
     resultDiv.innerHTML = html;
